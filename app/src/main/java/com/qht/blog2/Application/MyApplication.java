@@ -1,9 +1,7 @@
 package com.qht.blog2.Application;
 
-import com.amitshekhar.DebugDB;
 import com.baidu.mapapi.SDKInitializer;
 import com.qht.blog2.Net.OK_LoggingInterceptor;
-import com.qht.blog2.Util.LogUtil;
 import com.qht.blog2.Util.SharePreferenceUtil;
 import com.umeng.commonsdk.UMConfigure;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -26,7 +24,6 @@ public class MyApplication  extends LitePalApplication {
     public void onCreate() {
         super.onCreate();
         instance =this;
-        LogUtil.e(DebugDB.getAddressLog());
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());//初始化百度地图
