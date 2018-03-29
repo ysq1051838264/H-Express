@@ -16,6 +16,7 @@ import com.qht.blog2.Util.GsonUtils;
 import com.qht.blog2.Util.PhoneUtil;
 import com.qht.blog2.Util.TextUtil;
 import com.qht.blog2.Util.ToastUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import org.litepal.crud.DataSupport;
 
@@ -49,6 +50,19 @@ public class AddAdrActivity extends ToolBarActivity {
         super.onCreate(savedInstanceState);
         getToolbarTitle().setText("添加地址");
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override

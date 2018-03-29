@@ -8,16 +8,19 @@ import android.view.View;
 import com.qht.blog2.BaseActivity.ToolBarActivity;
 import com.qht.blog2.OtherActivity.MainActivity;
 import com.qht.blog2.R;
+import com.umeng.analytics.MobclickAgent;
 
 public class SwitchModeActivity extends ToolBarActivity {
 
     /**
-     *http://blog.csdn.net/asd2603934/article/details/50541701?locationNum=2&fps=1*/
+     * http://blog.csdn.net/asd2603934/article/details/50541701?locationNum=2&fps=1
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initview();
     }
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_switch_mode;
@@ -43,9 +46,23 @@ public class SwitchModeActivity extends ToolBarActivity {
         } catch (Exception e) {
         }
     }
+
     //按返回键
     @Override
     public void onBackPressed() {
         back(null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

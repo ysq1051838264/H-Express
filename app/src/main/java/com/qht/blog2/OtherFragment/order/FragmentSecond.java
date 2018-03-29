@@ -14,6 +14,7 @@ import com.qht.blog2.BaseEventBus.EventBusUtil;
 import com.qht.blog2.BaseFragment.BaseFragment;
 import com.qht.blog2.OtherFragment.order.event.OrderEvent;
 import com.qht.blog2.R;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -100,5 +101,17 @@ public class FragmentSecond extends BaseFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.mActivity=activity;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(getContext());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(getContext());
     }
 }

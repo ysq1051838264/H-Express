@@ -32,6 +32,7 @@ import com.qht.blog2.Util.TextUtil;
 import com.qht.blog2.Util.ToastUtil;
 import com.qht.blog2.Util.UrlUtil;
 import com.qht.blog2.View.EmptyViewLayout;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -88,6 +89,7 @@ public class FragmentFrist extends BaseFragment {
         emptyView.bindView(content);// 绑定要显示的View
         emptyView.buttonClick(this, "query");// 加载失败后点击的时候执行onload方法
         ButterKnife.bind(this, rootView);
+
         return rootView;
     }
 
@@ -97,13 +99,16 @@ public class FragmentFrist extends BaseFragment {
             case R.id.scan:
                 Intent intent = new Intent(mActivity, CaptureActivity.class);
                 startActivityForResult(intent, ConstantUtil.REQUEST_QR_CODE);
+                MobclickAgent.onEvent(getContext(),"scan");
                 break;
             case R.id.arrow:
                 PhoneUtil.hideInputWindow(mActivity,view);
                 initOptionsPickerView();
+                MobclickAgent.onEvent(getContext(),"express");
                 break;
             case R.id.querybutton:
                 query();
+                MobclickAgent.onEvent(getContext(),"query");
                 break;
         }
     }
@@ -187,5 +192,17 @@ public class FragmentFrist extends BaseFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.mActivity=activity;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(getContext());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(getContext());
     }
 }

@@ -82,6 +82,7 @@
         android:layout_below="@id/ll1"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="70dp"
+        android:visibility="gone"
         android:cacheColorHint="#00000000"
         android:listSelector="@drawable/left_lv_click_selector"
         android:divider="@null"

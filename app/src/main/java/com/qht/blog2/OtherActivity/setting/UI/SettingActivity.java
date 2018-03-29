@@ -12,6 +12,7 @@ import com.qht.blog2.OtherActivity.address.UI.Addressctivity;
 import com.qht.blog2.OtherActivity.setting.data.CacheEvent;
 import com.qht.blog2.R;
 import com.qht.blog2.Util.GlideUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -38,6 +39,20 @@ public class SettingActivity extends ToolBarActivity {
         getToolbarTitle().setText("设置");
         tvImagecachesize.setText(GlideUtil.getInstance().getCacheSize(SettingActivity.this));
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
 
     @Override
     public int getContentViewId() {

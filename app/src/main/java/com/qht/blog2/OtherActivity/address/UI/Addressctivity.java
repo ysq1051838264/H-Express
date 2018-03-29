@@ -12,6 +12,7 @@ import com.qht.blog2.BaseBean.AddressBean;
 import com.qht.blog2.OtherActivity.address.data.Address_Adapter;
 import com.qht.blog2.R;
 import com.qht.blog2.View.EmptyViewLayout;
+import com.umeng.analytics.MobclickAgent;
 
 import org.litepal.crud.DataSupport;
 
@@ -83,6 +84,19 @@ public class Addressctivity extends ToolBarActivity {
         list.clear();
         list.addAll(QueryData());
         madapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
 

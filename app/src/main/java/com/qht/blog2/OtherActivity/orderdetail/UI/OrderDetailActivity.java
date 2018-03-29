@@ -26,6 +26,7 @@ import com.qht.blog2.Util.DialogUtil;
 import com.qht.blog2.Util.Gson_ErrorLinkTreeMap_Helper;
 import com.qht.blog2.Util.TimeUtil;
 import com.qht.blog2.Util.UrlUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -72,6 +73,19 @@ public class OrderDetailActivity extends ToolBarActivity {
         ButterKnife.bind(this);
         getToolbarTitle().setText("订单详情");
         initMenu();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     private void initMenu() {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.qht.blog2.BaseAdapter.BaseViewPage.BasePageAdapter;
 import com.qht.blog2.BaseFragment.BaseFragment;
 import com.qht.blog2.R;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +57,18 @@ public class FragmentThird extends BaseFragment {
 
         BasePageAdapter viewPagerAdapter = new BasePageAdapter(getFragmentManager(), R.array.FragmentThree_viewpage_titles, TAG);
         viewpager.setAdapter(viewPagerAdapter);//设置适配器
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(getContext());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(getContext());
     }
 
 }

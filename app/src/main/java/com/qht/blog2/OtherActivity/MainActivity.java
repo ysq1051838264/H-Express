@@ -54,22 +54,20 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
 public class MainActivity extends ToolBarActivity implements ViewCreator<SlideLeftBean, Side_LeftAdapter.SlideLeftHolder> {
-
-
     @BindView(R.id.ll_bottom_iv_one)
     ImageView llBottomIvOne;
     @BindView(R.id.ll_bottom_tv_one)
-    TextView  llBottomTvOne;
+    TextView llBottomTvOne;
 
     @BindView(R.id.ll_bottom_iv_two)
     ImageView llBottomIvTwo;
     @BindView(R.id.ll_bottom_tv_two)
-    TextView  llbottomTvTwo;
+    TextView llbottomTvTwo;
 
     @BindView(R.id.ll_bottom_iv_three)
     ImageView llBottomIvThree;
     @BindView(R.id.ll_bottom_tv_three)
-    TextView  llBottomTvThree;
+    TextView llBottomTvThree;
 
     @BindView(R.id.ll_bottom_rl_one)
     RelativeLayout llBottomRlOne;
@@ -78,33 +76,33 @@ public class MainActivity extends ToolBarActivity implements ViewCreator<SlideLe
     @BindView(R.id.ll_bottom_rl_three)
     RelativeLayout llBottomRlThree;
     @BindView(R.id.toolbar_subtitle)
-    TextView       toolbarSubtitle;
+    TextView toolbarSubtitle;
     @BindView(R.id.ll_bottom_tab)
-    LinearLayout   llBottomTab;
+    LinearLayout llBottomTab;
     @BindView(R.id.content_layout)
-    LinearLayout   contentLayout;
+    LinearLayout contentLayout;
     @BindView(R.id.line)
-    View           line;
+    View line;
     @BindView(R.id.toolbar_sub2title)
-    TextView       toolbarSub2title;
+    TextView toolbarSub2title;
     @BindView(R.id.iv_bottom)
-    ImageView      ivBottom;
+    ImageView ivBottom;
     @BindView(R.id.lv)
-    ListView       lv;
+    ListView lv;
     @BindView(R.id.dl)
-    DragLayout     dl;
+    DragLayout dl;
     @BindView(R.id.left_name)
-    TextView       leftName;
+    TextView leftName;
     @BindView(R.id.ll_left_setting)
-    LinearLayout   llLeftSetting;
+    LinearLayout llLeftSetting;
     @BindView(R.id.ll_left_night)
-    LinearLayout   llLeftNight;
+    LinearLayout llLeftNight;
     @BindView(R.id.tv_left_weather)
-    TextView       tvLeftWeather;
+    TextView tvLeftWeather;
     @BindView(R.id.tv_left_city)
-    TextView       tvLeftCity;
+    TextView tvLeftCity;
     @BindView(R.id.tv_left_night)
-    TextView       tvleftnight;
+    TextView tvleftnight;
     @BindView(R.id.crl)
     CustomRelativeLayout crl;
     @BindView(R.id.rl_left_bg)
@@ -132,20 +130,15 @@ public class MainActivity extends ToolBarActivity implements ViewCreator<SlideLe
 
     private void initView() {
 
-        if(enableNightMode){
+        if (enableNightMode) {
             tvleftnight.setText("夜间");
             rlleftbg.setBackgroundResource(R.drawable.sidebar_bg_night);
-        }else{
+        } else {
             tvleftnight.setText("白天");
             rlleftbg.setBackgroundResource(R.drawable.sidebar_bg);
         }
-        getToolbar().setNavigationIcon(getResources().getDrawable(R.mipmap.home_menu_48));
-        getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dl.open();
-            }
-        });
+
+
         Side_LeftAdapter mAdapter = new Side_LeftAdapter(Left_itemdata.getItemBeans(), this);
         lv.setAdapter(mAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,7 +155,7 @@ public class MainActivity extends ToolBarActivity implements ViewCreator<SlideLe
                         break;
                     case 2:
                         //关于
-                        startActivity(new Intent(MainActivity.this,AboutActivity.class));
+                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
                         break;
                     case 3:
                         //退出登录
@@ -225,6 +218,7 @@ public class MainActivity extends ToolBarActivity implements ViewCreator<SlideLe
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(ivBottom);
     }
+
     /**
      * From: Weather()
      */
@@ -375,7 +369,7 @@ public class MainActivity extends ToolBarActivity implements ViewCreator<SlideLe
 
 
     @OnClick({R.id.ll_bottom_rl_one, R.id.ll_bottom_rl_two, R.id.ll_bottom_rl_three,
-            R.id.toolbar_subtitle, R.id.toolbar_sub2title, R.id.left_name,R.id.ll_left_setting, R.id.ll_left_night})
+            R.id.toolbar_subtitle, R.id.toolbar_sub2title, R.id.left_name, R.id.ll_left_setting, R.id.ll_left_night})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_bottom_rl_one:
@@ -435,31 +429,32 @@ public class MainActivity extends ToolBarActivity implements ViewCreator<SlideLe
                 break;
             case R.id.ll_left_night:
                 //夜间模式
-                if(tvleftnight.getText().toString().equals("夜间")){
-                    SharePreferenceUtil.setBooleanSP("enableNightMode",false);
+                if (tvleftnight.getText().toString().equals("夜间")) {
+                    SharePreferenceUtil.setBooleanSP("enableNightMode", false);
                     tvleftnight.setText("白天");
-                    setEnableNightMode(false,crl);
-                }else{
-                    SharePreferenceUtil.setBooleanSP("enableNightMode",true);
+                    setEnableNightMode(false, crl);
+                } else {
+                    SharePreferenceUtil.setBooleanSP("enableNightMode", true);
                     tvleftnight.setText("夜间");
-                    setEnableNightMode(true,crl);
+                    setEnableNightMode(true, crl);
 
                 }
                 break;
 
         }
     }
-        /**
-        * 如果在 MainActivity 上返回首页，则不需要Intent ，而是切换到FirstFragment
-        * */
-         @Override
-         protected void backhome() {
-             getSubTitle().setVisibility(View.GONE);
-             getSub2Title().setVisibility(View.GONE);
-             getToolbarTitle().setText("查询");
-             reViewStatus("1");
-             clickTab1Layout();
-         }
+
+    /**
+     * 如果在 MainActivity 上返回首页，则不需要Intent ，而是切换到FirstFragment
+     */
+    @Override
+    protected void backhome() {
+        getSubTitle().setVisibility(View.GONE);
+        getSub2Title().setVisibility(View.GONE);
+        getToolbarTitle().setText("查询");
+        reViewStatus("1");
+        clickTab1Layout();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -481,6 +476,7 @@ public class MainActivity extends ToolBarActivity implements ViewCreator<SlideLe
         // 不保存onSaveInstanceState，即不执行super方法，使Activity失去fragment状态，使fragment的hide/show正常显示
         // 不然的话，调用hide/show 方法不会正常显示，不论底部怎么切换，一直停留 FirstFragment 页面。
     }
+
     @Override
     public void onStart() {
         super.onStart();
